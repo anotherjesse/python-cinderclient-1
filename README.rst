@@ -54,7 +54,7 @@ variables as well::
     export OS_AUTH_URL=http://example.com:8774/v1.1/
     export OS_COMPUTE_API_VERSION=1.1
 
-If you are using Keystone, you need to set the NOVA_URL to the keystone
+If you are using Keystone, you need to set the CINDER_URL to the keystone
 endpoint::
 
     export OS_AUTH_URL=http://example.com:5000/v2.0/
@@ -210,9 +210,9 @@ You'll find complete documentation on the shell by running
       --service_type SERVICE_TYPE
                             Defaults to compute for most actions
       --service_name SERVICE_NAME
-                            Defaults to env[NOVA_SERVICE_NAME]
+                            Defaults to env[CINDER_SERVICE_NAME]
       --endpoint_type ENDPOINT_TYPE
-                            Defaults to env[NOVA_ENDPOINT_TYPE] or publicURL.
+                            Defaults to env[CINDER_ENDPOINT_TYPE] or publicURL.
       --os_compute_api_version VERSION
                             Accepts 1.1, defaults to env[OS_COMPUTE_API_VERSION].
       --username USERNAME   Deprecated

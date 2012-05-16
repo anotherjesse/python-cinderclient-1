@@ -1,0 +1,11 @@
+.coverage
+.venv
+*,cover
+cover
+.idea
+*.swp
+*.pyc
+*~
+build
+dist
+python_cinderclient.egg-info

@@ -35,8 +35,8 @@ from cinderclient import utils
 from cinderclient.v1 import shell as shell_v1
 
 DEFAULT_OS_COMPUTE_API_VERSION = "1.1"
-DEFAULT_NOVA_ENDPOINT_TYPE = 'publicURL'
-DEFAULT_NOVA_SERVICE_TYPE = 'compute'
+DEFAULT_CINDER_ENDPOINT_TYPE = 'publicURL'
+DEFAULT_CINDER_SERVICE_TYPE = 'compute'
 
 logger = logging.getLogger(__name__)
 
@@ -87,41 +87,41 @@ class OpenStackComputeShell(object):
             help="Print debugging output")
 
         parser.add_argument('--os_username',
-            default=utils.env('OS_USERNAME', 'NOVA_USERNAME'),
+            default=utils.env('OS_USERNAME', 'CINDER_USERNAME'),
             help='Defaults to env[OS_USERNAME].')
 
         parser.add_argument('--os_password',
-            default=utils.env('OS_PASSWORD', 'NOVA_PASSWORD'),
+            default=utils.env('OS_PASSWORD', 'CINDER_PASSWORD'),
             help='Defaults to env[OS_PASSWORD].')
 
         parser.add_argument('--os_tenant_name',
-            default=utils.env('OS_TENANT_NAME', 'NOVA_PROJECT_ID'),
+            default=utils.env('OS_TENANT_NAME', 'CINDER_PROJECT_ID'),
             help='Defaults to env[OS_TENANT_NAME].')
 
         parser.add_argument('--os_auth_url',
-            default=utils.env('OS_AUTH_URL', 'NOVA_URL'),
+            default=utils.env('OS_AUTH_URL', 'CINDER_URL'),
             help='Defaults to env[OS_AUTH_URL].')
 
         parser.add_argument('--os_region_name',
-            default=utils.env('OS_REGION_NAME', 'NOVA_REGION_NAME'),
+            default=utils.env('OS_REGION_NAME', 'CINDER_REGION_NAME'),
             help='Defaults to env[OS_REGION_NAME].')
 
         parser.add_argument('--service_type',
             help='Defaults to compute for most actions')
 
         parser.add_argument('--service_name',
-            default=utils.env('NOVA_SERVICE_NAME'),
-            help='Defaults to env[NOVA_SERVICE_NAME]')
+            default=utils.env('CINDER_SERVICE_NAME'),
+            help='Defaults to env[CINDER_SERVICE_NAME]')
 
         parser.add_argument('--volume_service_name',
-            default=utils.env('NOVA_VOLUME_SERVICE_NAME'),
-            help='Defaults to env[NOVA_VOLUME_SERVICE_NAME]')
+            default=utils.env('CINDER_VOLUME_SERVICE_NAME'),
+            help='Defaults to env[CINDER_VOLUME_SERVICE_NAME]')
 
         parser.add_argument('--endpoint_type',
-            default=utils.env('NOVA_ENDPOINT_TYPE',
-                        default=DEFAULT_NOVA_ENDPOINT_TYPE),
-            help='Defaults to env[NOVA_ENDPOINT_TYPE] or '
-                    + DEFAULT_NOVA_ENDPOINT_TYPE + '.')
+            default=utils.env('CINDER_ENDPOINT_TYPE',
+                        default=DEFAULT_CINDER_ENDPOINT_TYPE),
+            help='Defaults to env[CINDER_ENDPOINT_TYPE] or '
+                    + DEFAULT_CINDER_ENDPOINT_TYPE + '.')
 
         parser.add_argument('--os_compute_api_version',
             default=utils.env('OS_COMPUTE_API_VERSION',
@@ -129,7 +129,7 @@ class OpenStackComputeShell(object):
             help='Accepts 1.1, defaults to env[OS_COMPUTE_API_VERSION].')
 
         parser.add_argument('--insecure',
-            default=utils.env('NOVACLIENT_INSECURE', default=False),
+            default=utils.env('CINDERCLIENT_INSECURE', default=False),
             action='store_true',
             help=argparse.SUPPRESS)
 
@@ -146,17 +146,17 @@ class OpenStackComputeShell(object):
 
         # alias for --os_password, left in for backwards compatibility
         parser.add_argument('--apikey', '--password', dest='apikey',
-            default=utils.env('NOVA_API_KEY'),
+            default=utils.env('CINDER_API_KEY'),
             help='Deprecated')
 
         # alias for --os_tenant_name, left in for backward compatibility
         parser.add_argument('--projectid', '--tenant_name', dest='projectid',
-            default=utils.env('NOVA_PROJECT_ID'),
+            default=utils.env('CINDER_PROJECT_ID'),
             help='Deprecated')
 
         # alias for --os_auth_url, left in for backward compatibility
         parser.add_argument('--url', '--auth_url', dest='url',
-            default=utils.env('NOVA_URL'),
+            default=utils.env('CINDER_URL'),
             help='Deprecated')
 
         return parser
@@ -308,10 +308,10 @@ class OpenStackComputeShell(object):
                         args.url, args.region_name)
 
         if not endpoint_type:
-            endpoint_type = DEFAULT_NOVA_ENDPOINT_TYPE
+            endpoint_type = DEFAULT_CINDER_ENDPOINT_TYPE
 
         if not service_type:
-            service_type = DEFAULT_NOVA_SERVICE_TYPE
+            service_type = DEFAULT_CINDER_SERVICE_TYPE
             service_type = utils.get_service_type(args.func) or service_type
 
         #FIXME(usrleon): Here should be restrict for project id same as

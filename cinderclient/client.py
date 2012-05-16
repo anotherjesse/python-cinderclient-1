@@ -28,7 +28,7 @@ from cinderclient import utils
 
 
 _logger = logging.getLogger(__name__)
-if 'NOVACLIENT_DEBUG' in os.environ and os.environ['NOVACLIENT_DEBUG']:
+if 'CINDERCLIENT_DEBUG' in os.environ and os.environ['CINDERCLIENT_DEBUG']:
     ch = logging.StreamHandler()
     _logger.setLevel(logging.DEBUG)
     _logger.addHandler(ch)
@@ -225,7 +225,7 @@ class HTTPClient(httplib2.Http):
         auth_url = self.auth_url
         if self.version == "v2.0":  # FIXME(chris): This should be better.
             while auth_url:
-                if "NOVA_RAX_AUTH" in os.environ:
+                if "CINDER_RAX_AUTH" in os.environ:
                     auth_url = self._rax_auth(auth_url)
                 else:
                     auth_url = self._v2_auth(auth_url)

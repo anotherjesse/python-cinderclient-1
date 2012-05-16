@@ -34,11 +34,11 @@ class ShellTest(utils.TestCase):
         """Run before each test."""
         self.old_environment = os.environ.copy()
         os.environ = {
-            'NOVA_USERNAME': 'username',
-            'NOVA_PASSWORD': 'password',
-            'NOVA_PROJECT_ID': 'project_id',
+            'CINDER_USERNAME': 'username',
+            'CINDER_PASSWORD': 'password',
+            'CINDER_PROJECT_ID': 'project_id',
             'OS_COMPUTE_API_VERSION': '1.1',
-            'NOVA_URL': 'http://no.where',
+            'CINDER_URL': 'http://no.where',
         }
 
         self.shell = cinderclient.shell.OpenStackComputeShell()

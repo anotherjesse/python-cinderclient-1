@@ -92,13 +92,13 @@ class Manager(utils.HookableMixin):
         Delete is not handled because listings are assumed to be performed
         often enough to keep the cache reasonably up-to-date.
         """
-        base_dir = utils.env('NOVACLIENT_UUID_CACHE_DIR',
+        base_dir = utils.env('CINDERCLIENT_UUID_CACHE_DIR',
                              default="~/.cinderclient")
 
         # NOTE(sirp): Keep separate UUID caches for each username + endpoint
         # pair
-        username = utils.env('OS_USERNAME', 'NOVA_USERNAME')
-        url = utils.env('OS_URL', 'NOVA_URL')
+        username = utils.env('OS_USERNAME', 'CINDER_USERNAME')
+        url = utils.env('OS_URL', 'CINDER_URL')
         uniqifier = hashlib.md5(username + url).hexdigest()
 
         cache_dir = os.path.expanduser(os.path.join(base_dir, uniqifier))
