@@ -79,72 +79,20 @@ You'll find complete documentation on the shell by running
 
     Positional arguments:
       <subcommand>
+        create              Add a new volume.
+        credentials         Show user credentials returned from auth
+        delete              Remove a volume.
         endpoints           Discover endpoints that get returned from the
                             authenticate services
-        image-delete        Delete an image.
-        image-list          Print a list of available images to boot from.
-        image-meta          Set or Delete metadata on an image.
-        image-show          Show details about the given image.
-        keypair-add         Create a new key pair for use with instances
-        keypair-delete      Delete keypair by its id
-        keypair-list        Print a list of keypairs for a user
-        list                List active servers.
-        live-migration      Migrates a running instance to a new machine.
-        lock                Lock a server.
-        meta                Set or Delete metadata on a server.
-        migrate             Migrate a server.
-        pause               Pause a server.
-        rate-limits         Print a list of rate limits for a user
-        reboot              Reboot a server.
-        rebuild             Shutdown, re-image, and re-boot a server.
-        remove-fixed-ip     Remove an IP address from a server.
-        remove-floating-ip  Remove a floating IP address from a server.
-        rename              Rename a server.
-        rescue              Rescue a server.
-        resize              Resize a server.
-        resize-confirm      Confirm a previous resize.
-        resize-revert       Revert a previous resize (and return to the previous
-                            VM).
-        resume              Resume a server.
-        root-password       Change the root password for a server.
-        secgroup-add-group-rule
-                            Add a source group rule to a security group.
-        secgroup-add-rule   Add a rule to a security group.
-        secgroup-create     Create a security group.
-        secgroup-delete     Delete a security group.
-        secgroup-delete-group-rule
-                            Delete a source group rule from a security group.
-        secgroup-delete-rule
-                            Delete a rule from a security group.
-        secgroup-list       List security groups for the curent tenant.
-        secgroup-list-rules
-                            List rules for a security group.
-        show                Show details about the given server.
-        ssh                 SSH into a server.
-        suspend             Suspend a server.
-        unlock              Unlock a server.
-        unpause             Unpause a server.
-        unrescue            Unrescue a server.
-        usage-list          List usage data for all tenants
-        volume-attach       Attach a volume to a server.
-        volume-create       Add a new volume.
-        volume-delete       Remove a volume.
-        volume-detach       Detach a volume from a server.
-        volume-list         List all the volumes.
-        volume-show         Show details about a volume.
-        volume-snapshot-create
-                            Add a new snapshot.
-        volume-snapshot-delete
-                            Remove a snapshot.
-        volume-snapshot-list
-                            List all the snapshots.
-        volume-snapshot-show
-                            Show details about a snapshot.
-        volume-type-create  Create a new volume type.
-        volume-type-delete  Delete a specific flavor
-        volume-type-list    Print a list of available 'volume types'.
-        x509-create-cert    Create x509 cert for a user in tenant
-        x509-get-root-cert  Fetches the x509 root cert.
+        list                List all the volumes.
+        show                Show details about a volume.
+        snapshot-create     Add a new snapshot.
+        snapshot-delete     Remove a snapshot.
+        snapshot-list       List all the snapshots.
+        snapshot-show       Show details about a snapshot.
+        type-create         Create a new volume type.
+        type-delete         Delete a specific flavor
+        type-list           Print a list of available 'volume types'.
         bash-completion     Prints all of the commands and options to stdout so
                             that the
         help                Display help about this program or one of its

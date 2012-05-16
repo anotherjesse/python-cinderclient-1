@@ -216,7 +216,7 @@ def do_type_list(cs, args):
      metavar='<name>',
      help="Name of the new flavor")
 @utils.service_type('volume')
-def do_volume_type_create(cs, args):
+def do_type_create(cs, args):
     """Create a new volume type."""
     vtype = cs.volume_types.create(args.name)
     _print_volume_type_list([vtype])
@@ -226,7 +226,7 @@ def do_volume_type_create(cs, args):
      metavar='<id>',
      help="Unique ID of the volume type to delete")
 @utils.service_type('volume')
-def do_volume_type_delete(cs, args):
+def do_type_delete(cs, args):
     """Delete a specific flavor"""
     cs.volume_types.delete(args.id)
 
