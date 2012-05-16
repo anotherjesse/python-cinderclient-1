@@ -43,16 +43,16 @@ SERVICE_CATALOG = {
                         "internalURL": "https://compute1.host/v1/1234",
                         "region": "North",
                         "versionId": "1.0",
-                        "versionInfo": "https://compute1.host/v1.0/",
+                        "versionInfo": "https://compute1.host/v1/",
                         "versionList": "https://compute1.host/"
                     },
                     {
                         "tenantId": "2",
-                        "publicURL": "https://compute1.host/v1.1/3456",
-                        "internalURL": "https://compute1.host/v1.1/3456",
+                        "publicURL": "https://compute1.host/v1/3456",
+                        "internalURL": "https://compute1.host/v1/3456",
                         "region": "North",
                         "versionId": "1.1",
-                        "versionInfo": "https://compute1.host/v1.1/",
+                        "versionInfo": "https://compute1.host/v1/",
                         "versionList": "https://compute1.host/"
                     },
                 ],
@@ -73,11 +73,11 @@ SERVICE_CATALOG = {
                     },
                     {
                         "tenantId": "2",
-                        "publicURL": "https://volume1.host/v1.1/3456",
-                        "internalURL": "https://volume1.host/v1.1/3456",
+                        "publicURL": "https://volume1.host/v1/3456",
+                        "internalURL": "https://volume1.host/v1/3456",
                         "region": "South",
                         "versionId": "1.1",
-                        "versionInfo": "https://volume1.host/v1.1/",
+                        "versionInfo": "https://volume1.host/v1/",
                         "versionList": "https://volume1.host/"
                     },
                 ],
@@ -108,7 +108,7 @@ class ServiceCatalogTest(utils.TestCase):
         self.assertEquals(sc.url_for('tenantId', '1', service_type='compute'),
                             "https://compute1.host/v1/1234")
         self.assertEquals(sc.url_for('tenantId', '2', service_type='compute'),
-                            "https://compute1.host/v1.1/3456")
+                            "https://compute1.host/v1/3456")
 
         self.assertRaises(exceptions.EndpointNotFound, sc.url_for,
                           "region", "South", service_type='compute')
@@ -121,7 +121,7 @@ class ServiceCatalogTest(utils.TestCase):
         self.assertEquals(sc.url_for('tenantId', '1', service_type='volume'),
                             "https://volume1.host/v1/1234")
         self.assertEquals(sc.url_for('tenantId', '2', service_type='volume'),
-                            "https://volume1.host/v1.1/3456")
+                            "https://volume1.host/v1/3456")
 
         self.assertRaises(exceptions.EndpointNotFound, sc.url_for,
                           "region", "North", service_type='volume')

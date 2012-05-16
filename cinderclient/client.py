@@ -223,7 +223,7 @@ class HTTPClient(httplib2.Http):
                         (scheme, new_netloc, path, query, frag))
 
         auth_url = self.auth_url
-        if self.version == "v2.0":  # FIXME(chris): This should be better.
+        if self.version == "v2.0":
             while auth_url:
                 if "CINDER_RAX_AUTH" in os.environ:
                     auth_url = self._rax_auth(auth_url)
@@ -314,7 +314,6 @@ class HTTPClient(httplib2.Http):
 def get_client_class(version):
     version_map = {
         '1': 'cinderclient.v1.client.Client',
-        '2': 'cinderclient.v1.client.Client',
     }
     try:
         client_path = version_map[str(version)]

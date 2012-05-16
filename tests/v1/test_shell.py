@@ -16,13 +16,10 @@
 #    under the License.
 
 import os
-import mock
-import sys
-import tempfile
 
-import cinderclient.shell
-import cinderclient.client
+from cinderclient import client
 from cinderclient import exceptions
+from cinderclient import shell
 from tests.v1 import fakes
 from tests import utils
 
@@ -41,11 +38,11 @@ class ShellTest(utils.TestCase):
             'CINDER_URL': 'http://no.where',
         }
 
-        self.shell = cinderclient.shell.OpenStackCinderShell()
+        self.shell = shell.OpenStackCinderShell()
 
         #HACK(bcwaldon): replace this when we start using stubs
-        self.old_get_client_class = cinderclient.client.get_client_class
-        cinderclient.client.get_client_class = lambda *_: fakes.FakeClient
+        self.old_get_client_class = client.get_client_class
+        client.get_client_class = lambda *_: fakes.FakeClient
 
     def tearDown(self):
         os.environ = self.old_environment
@@ -57,7 +54,7 @@ class ShellTest(utils.TestCase):
             self.shell.cs.clear_callstack()
 
         #HACK(bcwaldon): replace this when we start using stubs
-        cinderclient.client.get_client_class = self.old_get_client_class
+        client.get_client_class = self.old_get_client_class
 
     def run_command(self, cmd):
         self.shell.main(cmd.split())
@@ -68,11 +65,9 @@ class ShellTest(utils.TestCase):
     def assert_called_anytime(self, method, url, body=None):
         return self.shell.cs.assert_called_anytime(method, url, body)
 
-
     def test_list(self):
         self.run_command('list')
         self.assert_called('GET', '/servers/detail')
-
 
     def test_show(self):
         self.run_command('show 1234')
@@ -112,4 +107,3 @@ class ShellTest(utils.TestCase):
         self.run_command('dns-list testdomain --name testname')
         self.assert_called('GET',
                            '/os-floating-ip-dns/testdomain/entries/testname')
-
