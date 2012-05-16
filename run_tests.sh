@@ -66,6 +66,8 @@ if [ $no_site_packages -eq 1 ]; then
 fi
 
 function run_tests {
+  # Cleanup *.pyc
+  ${wrapper} find . -type f -name "*.pyc" -delete
   # Just run the test suites in current environment
   ${wrapper} $NOSETESTS
   # If we get some short import error right away, print the error log directly
