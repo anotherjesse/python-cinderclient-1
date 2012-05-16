@@ -1,4 +1,4 @@
-# Copyright 2010 Jacob Kaplan-Moss
+
 # Copyright 2011 OpenStack LLC.
 # All Rights Reserved.
 #
@@ -63,7 +63,7 @@ class NovaClientArgumentParser(argparse.ArgumentParser):
                       'subp': progparts[2]})
 
 
-class OpenStackComputeShell(object):
+class OpenStackCinderShell(object):
 
     def get_base_parser(self):
         parser = NovaClientArgumentParser(
@@ -425,7 +425,7 @@ class OpenStackHelpFormatter(argparse.HelpFormatter):
 
 def main():
     try:
-        OpenStackComputeShell().main(sys.argv[1:])
+        OpenStackCinderShell().main(sys.argv[1:])
 
     except Exception, e:
         logger.debug(e, exc_info=1)

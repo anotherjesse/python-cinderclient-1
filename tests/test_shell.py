@@ -25,7 +25,7 @@ class ShellTest(utils.TestCase):
         orig = sys.stdout
         try:
             sys.stdout = cStringIO.StringIO()
-            _shell = cinderclient.shell.OpenStackComputeShell()
+            _shell = cinderclient.shell.OpenStackCinderShell()
             _shell.main(argstr.split())
         except SystemExit:
             exc_type, exc_value, exc_traceback = sys.exc_info()
