@@ -1,6 +1,6 @@
 from cinderclient import base
 from cinderclient import exceptions
-from cinderclient.v1 import flavors
+from cinderclient.v1 import volumes
 from tests import utils
 from tests.v1 import fakes
 
@@ -21,14 +21,6 @@ class BaseTest(utils.TestCase):
             id = 4
         self.assertEqual(base.getid(TmpObject), 4)
 
-    def test_resource_lazy_getattr(self):
-        f = flavors.Flavor(cs.flavors, {'id': 1})
-        self.assertEqual(f.name, '256 MB Server')
-        cs.assert_called('GET', '/flavors/1')
-
-        # Missing stuff still fails after a second get
-        self.assertRaises(AttributeError, getattr, f, 'blahblah')
-
     def test_eq(self):
         # Two resources of the same type with the same id: equal
         r1 = base.Resource(None, {'id': 1, 'name': 'hi'})
@@ -37,7 +29,7 @@ class BaseTest(utils.TestCase):
 
         # Two resoruces of different types: never equal
         r1 = base.Resource(None, {'id': 1})
-        r2 = flavors.Flavor(None, {'id': 1})
+        r2 = volumes.Volume(None, {'id': 1})
         self.assertNotEqual(r1, r2)
 
         # Two resources with no ID: equal if their info is equal
@@ -48,9 +40,9 @@ class BaseTest(utils.TestCase):
     def test_findall_invalid_attribute(self):
         # Make sure findall with an invalid attribute doesn't cause errors.
         # The following should not raise an exception.
-        cs.flavors.findall(vegetable='carrot')
+        cs.volumes.findall(vegetable='carrot')
 
         # However, find() should raise an error
         self.assertRaises(exceptions.NotFound,
-                          cs.flavors.find,
+                          cs.volumes.find,
                           vegetable='carrot')

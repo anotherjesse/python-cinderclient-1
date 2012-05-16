@@ -129,78 +129,10 @@ class FakeHTTPClient(base_client.HTTPClient):
     # Servers
     #
 
-    def get_servers(self, **kw):
-        return (200, {"servers": [
-            {'id': 1234, 'name': 'sample-server'},
-            {'id': 5678, 'name': 'sample-server2'}
-        ]})
-
-    def get_servers_detail(self, **kw):
-        return (200, {"servers": [
-            {
-                "id": 1234,
-                "name": "sample-server",
-                "image": {
-                    "id": 2,
-                    "name": "sample image",
-                },
-                "flavor": {
-                    "id": 1,
-                    "name": "256 MB Server",
-                },
-                "hostId": "e4d909c290d0fb1ca068ffaddf22cbd0",
-                "status": "BUILD",
-                "progress": 60,
-                "addresses": {
-                    "public": [{
-                        "version": 4,
-                        "addr": "1.2.3.4",
-                    },
-                    {
-                        "version": 4,
-                        "addr": "5.6.7.8",
-                    }],
-                    "private": [{
-                        "version": 4,
-                        "addr": "10.11.12.13",
-                    }],
-                },
-                "metadata": {
-                    "Server Label": "Web Head 1",
-                    "Image Version": "2.1"
-                }
-            },
-            {
-                "id": 5678,
-                "name": "sample-server2",
-                "image": {
-                    "id": 2,
-                    "name": "sample image",
-                },
-                "flavor": {
-                    "id": 1,
-                    "name": "256 MB Server",
-                },
-                "hostId": "9e107d9d372bb6826bd81d3542a419d6",
-                "status": "ACTIVE",
-                "addresses": {
-                    "public": [{
-                        "version": 4,
-                        "addr": "4.5.6.7",
-                    },
-                    {
-                        "version": 4,
-                        "addr": "5.6.9.8",
-                    }],
-                    "private": [{
-                        "version": 4,
-                        "addr": "10.13.12.13",
-                    }],
-                },
-                "metadata": {
-                    "Server Label": "DB 1"
-                }
-            }
+    def get_volumes(self, **kw):
+        return (200, {"volumes": [
+            {'id': 1234, 'name': 'sample-volume'},
+            {'id': 5678, 'name': 'sample-volume2'}
         ]})
 
     def post_servers(self, body, **kw):

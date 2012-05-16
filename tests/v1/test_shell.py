@@ -71,45 +71,14 @@ class ShellTest(utils.TestCase):
 
     def test_list(self):
         self.run_command('list')
-        self.assert_called('GET', '/servers/detail')
+        self.assert_called('GET', '/volumes')
 
 
     def test_show(self):
         self.run_command('show 1234')
-        self.assert_called('GET', '/servers/1234', pos=-3)
-        self.assert_called('GET', '/flavors/1', pos=-2)
-        self.assert_called('GET', '/images/2')
-
-    def test_show_bad_id(self):
-        self.assertRaises(exceptions.CommandError,
-                          self.run_command, 'show xxx')
+        self.assert_called('GET', '/volumes/1234')
 
     def test_delete(self):
         self.run_command('delete 1234')
-        #self.assert_called('DELETE', '/servers/1234')
-        #self.run_command('delete sample-server')
-        #self.assert_called('DELETE', '/servers/1234')
-
-    def test_set_meta_set(self):
-        self.run_command('meta 1234 set key1=val1 key2=val2')
-        self.assert_called('POST', '/servers/1234/metadata',
-                           {'metadata': {'key1': 'val1', 'key2': 'val2'}})
-
-    def test_set_meta_delete_dict(self):
-        self.run_command('meta 1234 delete key1=val1 key2=val2')
-        self.assert_called('DELETE', '/servers/1234/metadata/key1')
-        self.assert_called('DELETE', '/servers/1234/metadata/key2', pos=-2)
-
-    def test_set_meta_delete_keys(self):
-        self.run_command('meta 1234 delete key1 key2')
-        self.assert_called('DELETE', '/servers/1234/metadata/key1')
-        self.assert_called('DELETE', '/servers/1234/metadata/key2', pos=-2)
-
-        self.run_command('dns-list testdomain --ip 192.168.1.1')
-        self.assert_called('GET',
-                       '/os-floating-ip-dns/testdomain/entries?ip=192.168.1.1')
-
-        self.run_command('dns-list testdomain --name testname')
-        self.assert_called('GET',
-                           '/os-floating-ip-dns/testdomain/entries/testname')
+        #self.assert_called('DELETE', '/volumes/1234')
 
