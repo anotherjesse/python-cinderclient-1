@@ -135,6 +135,17 @@ class FakeHTTPClient(base_client.HTTPClient):
             {'id': 5678, 'name': 'sample-volume2'}
         ]})
 
+    # TODO(jdg): make this right
+    def get_volumes_detail(self, **kw):
+        return (200, {"volumes": [
+            {'id': 1234, 'name': 'sample-volume'},
+            {'id': 5678, 'name': 'sample-volume2'}
+        ]})
+
+    def get_volumes_1234(self, **kw):
+        r = {'volume': self.get_volumes_detail()[1]['volumes'][0]}
+        return (200, r)
+
     def post_servers(self, body, **kw):
         assert set(body.keys()) <= set(['server', 'os:scheduler_hints'])
         fakes.assert_has_keys(body['server'],
@@ -159,6 +170,9 @@ class FakeHTTPClient(base_client.HTTPClient):
         return (204, None)
 
     def delete_servers_1234(self, **kw):
+        return (202, None)
+
+    def delete_volumes_1234(self, **kw):
         return (202, None)
 
     def delete_servers_1234_metadata_test_key(self, **kw):

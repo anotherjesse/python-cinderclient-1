@@ -52,7 +52,7 @@ class ShellTest(utils.TestCase):
     def test_help(self):
         required = [
             '^usage: ',
-            '(?m)^\s+root-password\s+Change the root password',
+            '(?m)^\s+create\s+Add a new volume.',
             '(?m)^See "cinder help COMMAND" for help on a specific command',
         ]
         for argstr in ['--help', 'help']:
@@ -62,13 +62,12 @@ class ShellTest(utils.TestCase):
 
     def test_help_on_subcommand(self):
         required = [
-            '^usage: cinder root-password',
-            '(?m)^Change the root password',
-            '(?m)^Positional arguments:',
+            '^usage: cinder list',
+            '(?m)^List all the volumes.',
         ]
         argstrings = [
-            'root-password --help',
-            'help root-password',
+            'list --help',
+            'help list',
         ]
         for argstr in argstrings:
             help_text = self.shell(argstr)
