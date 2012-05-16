@@ -1,9 +1,9 @@
-Python bindings to the OpenStack Nova API
-==================================================
+Python bindings to the OpenStack Volume API
+===========================================
 
-This is a client for the OpenStack Nova API. There's a Python API (the
+This is a client for the OpenStack Volume API. There's a Python API (the
 ``cinderclient`` module), and a command-line script (``cinder``). Each
-implements 100% of the OpenStack Nova API.
+implements 100% of the OpenStack Volume API.
 
 [PENDING] `Full documentation is available`__.
 
@@ -79,53 +79,8 @@ You'll find complete documentation on the shell by running
 
     Positional arguments:
       <subcommand>
-        absolute-limits     Print a list of absolute limits for a user
-        actions             Retrieve server actions.
-        add-fixed-ip        Add new IP address to network.
-        add-floating-ip     Add a floating IP address to a server.
-        aggregate-add-host  Add the host to the specified aggregate.
-        aggregate-create    Create a new aggregate with the specified details.
-        aggregate-delete    Delete the aggregate by its id.
-        aggregate-details   Show details of the specified aggregate.
-        aggregate-list      Print a list of all aggregates.
-        aggregate-remove-host
-                            Remove the specified host from the specfied aggregate.
-        aggregate-set-metadata
-                            Update the metadata associated with the aggregate.
-        aggregate-update    Update the aggregate's name and optionally
-                            availability zone.
-        boot                Boot a new server.
-        console-log         Get console log output of a server.
-        credentials         Show user credentials returned from auth
-        delete              Immediately shut down and delete a server.
-        describe-resource   Show details about a resource
-        diagnostics         Retrieve server diagnostics.
-        dns-create          Create a DNS entry for domain, name and ip.
-        dns-create-private-domain
-                            Create the specified DNS domain.
-        dns-create-public-domain
-                            Create the specified DNS domain.
-        dns-delete          Delete the specified DNS entry.
-        dns-delete-domain   Delete the specified DNS domain.
-        dns-domains         Print a list of available dns domains.
-        dns-list            List current DNS entries for domain and ip or domain
-                            and name.
         endpoints           Discover endpoints that get returned from the
                             authenticate services
-        flavor-create       Create a new flavor
-        flavor-delete       Delete a specific flavor
-        flavor-list         Print a list of available 'flavors' (sizes of
-                            servers).
-        floating-ip-create  Allocate a floating IP for the current tenant.
-        floating-ip-delete  De-allocate a floating IP.
-        floating-ip-list    List floating ips for this tenant.
-        floating-ip-pool-list
-                            List all floating ip pools.
-        get-vnc-console     Get a vnc console to a server.
-        host-action         Perform a power action on a host.
-        host-update         Update host settings.
-        image-create        Create a new image by taking a snapshot of a running
-                            server.
         image-delete        Delete an image.
         image-list          Print a list of available images to boot from.
         image-meta          Set or Delete metadata on an image.

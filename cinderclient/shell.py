@@ -15,7 +15,7 @@
 #    under the License.
 
 """
-Command-line interface to the OpenStack Nova API.
+Command-line interface to the OpenStack Volume API.
 """
 
 import argparse
@@ -34,17 +34,17 @@ import cinderclient.extension
 from cinderclient import utils
 from cinderclient.v1 import shell as shell_v1
 
-DEFAULT_OS_COMPUTE_API_VERSION = "1.1"
+DEFAULT_OS_VOLUME_API_VERSION = "1"
 DEFAULT_CINDER_ENDPOINT_TYPE = 'publicURL'
 DEFAULT_CINDER_SERVICE_TYPE = 'compute'
 
 logger = logging.getLogger(__name__)
 
 
-class NovaClientArgumentParser(argparse.ArgumentParser):
+class CinderClientArgumentParser(argparse.ArgumentParser):
 
     def __init__(self, *args, **kwargs):
-        super(NovaClientArgumentParser, self).__init__(*args, **kwargs)
+        super(CinderClientArgumentParser, self).__init__(*args, **kwargs)
 
     def error(self, message):
         """error(message: string)
@@ -66,7 +66,7 @@ class NovaClientArgumentParser(argparse.ArgumentParser):
 class OpenStackCinderShell(object):
 
     def get_base_parser(self):
-        parser = NovaClientArgumentParser(
+        parser = CinderClientArgumentParser(
             prog='cinder',
             description=__doc__.strip(),
             epilog='See "cinder help COMMAND" '\
@@ -123,10 +123,10 @@ class OpenStackCinderShell(object):
             help='Defaults to env[CINDER_ENDPOINT_TYPE] or '
                     + DEFAULT_CINDER_ENDPOINT_TYPE + '.')
 
-        parser.add_argument('--os_compute_api_version',
-            default=utils.env('OS_COMPUTE_API_VERSION',
-            default=DEFAULT_OS_COMPUTE_API_VERSION),
-            help='Accepts 1.1, defaults to env[OS_COMPUTE_API_VERSION].')
+        parser.add_argument('--os_volume_api_version',
+            default=utils.env('OS_VOLUME_API_VERSION',
+            default=DEFAULT_OS_VOLUME_API_VERSION),
+            help='Accepts 1, defaults to env[OS_VOLUME_API_VERSION].')
 
         parser.add_argument('--insecure',
             default=utils.env('CINDERCLIENT_INSECURE', default=False),
@@ -273,11 +273,11 @@ class OpenStackCinderShell(object):
 
         # build available subcommands based on version
         self.extensions = self._discover_extensions(
-                options.os_compute_api_version)
+                options.os_volume_api_version)
         self._run_extension_hooks('__pre_parse_args__')
 
         subcommand_parser = self.get_subcommand_parser(
-                options.os_compute_api_version)
+                options.os_volume_api_version)
         self.parser = subcommand_parser
 
         if options.help and len(args) == 0:
@@ -351,17 +351,15 @@ class OpenStackCinderShell(object):
             if not os_region_name and region_name:
                 os_region_name = region_name
 
-        if (options.os_compute_api_version and
-                options.os_compute_api_version != '1.0'):
-            if not os_tenant_name:
-                raise exc.CommandError("You must provide a tenant name "
-                        "via either --os_tenant_name or env[OS_TENANT_NAME]")
+        if not os_tenant_name:
+            raise exc.CommandError("You must provide a tenant name "
+                    "via either --os_tenant_name or env[OS_TENANT_NAME]")
 
-            if not os_auth_url:
-                raise exc.CommandError("You must provide an auth url "
-                        "via either --os_auth_url or env[OS_AUTH_URL]")
+        if not os_auth_url:
+            raise exc.CommandError("You must provide an auth url "
+                    "via either --os_auth_url or env[OS_AUTH_URL]")
 
-        self.cs = client.Client(options.os_compute_api_version, os_username,
+        self.cs = client.Client(options.os_volume_api_version, os_username,
                 os_password, os_tenant_name, os_auth_url, insecure,
                 region_name=os_region_name, endpoint_type=endpoint_type,
                 extensions=self.extensions, service_type=service_type,
